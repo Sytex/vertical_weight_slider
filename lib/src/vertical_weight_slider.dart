@@ -10,7 +10,7 @@ class VerticalWeightSlider extends StatelessWidget {
     this.height = 250,
     this.decoration = const PointerDecoration(),
     this.indicator,
-    required this.onChanged,
+    this.onChanged,
     this.isVertical = true,
     this.haptic = Haptic.none,
   })  : assert(maxWeight >= 0),
@@ -32,7 +32,7 @@ class VerticalWeightSlider extends StatelessWidget {
   final Widget? indicator;
 
   /// On optional listener that's called when the centered item changes.
-  final ValueChanged<double> onChanged;
+  final ValueChanged<double>? onChanged;
 
   /// A Boolean value that indicates whether the slider is vertical.
   final bool isVertical;
@@ -65,7 +65,7 @@ class VerticalWeightSlider extends StatelessWidget {
                             : WeightPointer(color: decoration.smallColor, width: decoration.width - (decoration.gap * 2), height: decoration.height - 1)),
               ),
               onSelectedItemChanged: (index) {
-                onChanged((index / controller.getIntervalToInt()) + controller.minWeight);
+                onChanged?.call((index / controller.getIntervalToInt()) + controller.minWeight);
                 haptic.run();
               },
             ),
